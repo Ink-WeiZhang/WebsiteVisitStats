@@ -36,6 +36,7 @@ i.e.
 
 ## Challenges
 * Docker appears to have compatiblity issues with ASP.NET Core 2.1
+* Parsing >1Gb data.csv takes a very long time
 
 ## Unfinished
 * GET Loyal Visit Filter on Loyalty
@@ -43,6 +44,8 @@ i.e.
 * GET Loyal Local Testing
 * GET Loyal Unit Testing
 * Docker support
+* ASP.NET Front End
+* More efficient csv parsing or db strategies
 
 
 ## Tests History
