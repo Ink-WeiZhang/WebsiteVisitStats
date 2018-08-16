@@ -10,6 +10,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using n360sitestats4.Models;
+using Microsoft.EntityFrameworkCore;
+using System.IO;
+using CsvHelper;
 
 namespace n360sitestats4
 {
@@ -25,6 +29,9 @@ namespace n360sitestats4
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<VisitStatsContext>(opt =>
+                opt.UseInMemoryDatabase("Visits").EnableSensitiveDataLogging());
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -39,9 +46,11 @@ namespace n360sitestats4
             {
                 app.UseHsts();
             }
-
+            
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseMvc(routes => {
+                routes.MapRoute("default", "{controller=VisitStats}/{action=Index}/{id?}");
+            });
         }
     }
 }
